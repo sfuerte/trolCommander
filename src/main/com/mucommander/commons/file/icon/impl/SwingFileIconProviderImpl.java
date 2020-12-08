@@ -19,7 +19,7 @@
 
 package com.mucommander.commons.file.icon.impl;
 
-import ch.randelshofer.quaqua.osx.OSXFile;
+// import ch.randelshofer.quaqua.osx.OSXFile;
 import com.mucommander.commons.file.AbstractFile;
 import com.mucommander.commons.file.FileProtocols;
 import com.mucommander.commons.file.icon.CacheableFileIconProvider;
@@ -79,18 +79,18 @@ class SwingFileIconProviderImpl extends LocalFileIconProvider implements Cacheab
 
 
 
-    private static void prepareQuaquaLibraries() {
-        String jarPath = FileUtils.getJarPath();
+    // private static void prepareQuaquaLibraries() {
+    //     String jarPath = FileUtils.getJarPath();
 
-        try {
-            FileUtils.copyJarFile("libquaqua.jnilib", jarPath);
-            FileUtils.copyJarFile("libquaqua64.dylib", jarPath);
-            FileUtils.copyJarFile("libquaqua64.jnilib", jarPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        OSXFile.setNativePath(FileUtils.getJarPath() + File.separator);
-    }
+    //     try {
+    //         FileUtils.copyJarFile("libquaqua.jnilib", jarPath);
+    //         FileUtils.copyJarFile("libquaqua64.dylib", jarPath);
+    //         FileUtils.copyJarFile("libquaqua64.jnilib", jarPath);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    //     OSXFile.setNativePath(FileUtils.getJarPath() + File.separator);
+    // }
 
 
 
@@ -104,16 +104,16 @@ class SwingFileIconProviderImpl extends LocalFileIconProvider implements Cacheab
         if (initialized) {
             return;
         }
-        if (OsFamily.MAC_OS_X.isCurrent()) {
-            // try to use quaqua OSXFile
-            prepareQuaquaLibraries();
-            // use ugly JFileChooser if error
-            if (!OSXFile.canWorkWithAliases()) {
-                fileChooser = new JFileChooser();
-            }
-        } else {
+        // if (OsFamily.MAC_OS_X.isCurrent()) {
+        //     // try to use quaqua OSXFile
+        //     prepareQuaquaLibraries();
+        //     // use ugly JFileChooser if error
+        //     if (!OSXFile.canWorkWithAliases()) {
+        //         fileChooser = new JFileChooser();
+        //     }
+        // } else {
             fileSystemView = FileSystemView.getFileSystemView();
-        }
+        // }
 
         // Loads the symlink overlay icon
         URL iconURL = ResourceLoader.getPackageResourceAsURL(SwingFileIconProviderImpl.class.getPackage(), SYMLINK_ICON_NAME);
@@ -154,16 +154,16 @@ class SwingFileIconProviderImpl extends LocalFileIconProvider implements Cacheab
                 errOut.setSilenced(true);
                 return fileSystemView.getSystemIcon(javaIoFile);
             } else {
-                if (fileChooser == null) {
-                    if (RetinaImageIcon.IS_RETINA) {
-                        Icon icon = OSXFile.getIcon(javaIoFile, preferredSize*2);
-                        if (icon instanceof ImageIcon) {
-                            ImageIcon imageIcon = (ImageIcon)icon;
-                            return new RetinaImageIcon(imageIcon.getImage());
-                        }
-                    }
-                    return OSXFile.getIcon(javaIoFile, preferredSize);
-                }
+                // if (fileChooser == null) {
+                //     if (RetinaImageIcon.IS_RETINA) {
+                //         Icon icon = OSXFile.getIcon(javaIoFile, preferredSize*2);
+                //         if (icon instanceof ImageIcon) {
+                //             ImageIcon imageIcon = (ImageIcon)icon;
+                //             return new RetinaImageIcon(imageIcon.getImage());
+                //         }
+                //     }
+                //     return OSXFile.getIcon(javaIoFile, preferredSize);
+                // }
                 return fileChooser.getIcon(javaIoFile);
             }
         } catch (Exception e) {
@@ -226,7 +226,7 @@ class SwingFileIconProviderImpl extends LocalFileIconProvider implements Cacheab
     }
 
     public Icon lookupCache(AbstractFile file, Dimension preferredResolution) {
-        // Under Mac OS X, return the icon of /Network for the root of remote (non-local) locations. 
+        // Under Mac OS X, return the icon of /Network for the root of remote (non-local) locations.
         if (OsFamily.MAC_OS_X.isCurrent() && !FileProtocols.FILE.equals(file.getURL().getScheme()) && file.isRoot()) {
             return getSwingIcon(new File("/Network"), preferredResolution.width);
         }

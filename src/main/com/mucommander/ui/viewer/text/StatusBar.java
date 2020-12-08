@@ -17,7 +17,7 @@
  */
 package com.mucommander.ui.viewer.text;
 
-import com.mucommander.ui.main.statusbar.FileWindowsListButton;
+// import com.mucommander.ui.main.statusbar.FileWindowsListButton;
 import org.fife.ui.StatusBarPanel;
 
 import javax.swing.JLabel;
@@ -42,7 +42,7 @@ public class StatusBar extends org.fife.ui.StatusBar {
     private JLabel lblPosition;
     private JLabel lblEncoding;
     private JLabel lblSyntax;
-    private FileWindowsListButton lbFiles;
+    // private FileWindowsListButton lbFiles;
 
     private int color = -1;
 
@@ -53,9 +53,9 @@ public class StatusBar extends org.fife.ui.StatusBar {
     public StatusBar() {
         super("");
 
-        lbFiles = new FileWindowsListButton(true);
-        panelWindows = new StatusBarPanel(new BorderLayout());
-        panelWindows.add(lbFiles);
+        // lbFiles = new FileWindowsListButton(true);
+        // panelWindows = new StatusBarPanel(new BorderLayout());
+        // panelWindows.add(lbFiles);
 
         lblColor = new JLabel("          ");
         panelColor = new StatusBarPanel(new BorderLayout(), lblColor);
@@ -74,7 +74,7 @@ public class StatusBar extends org.fife.ui.StatusBar {
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 0.0;
 
-        addStatusBarComponent(panelWindows, c);
+        // addStatusBarComponent(panelWindows, c);
         addStatusBarComponent(panelPosition, c);
         addStatusBarComponent(panelColor, c);
         addStatusBarComponent(panelSyntax, c);

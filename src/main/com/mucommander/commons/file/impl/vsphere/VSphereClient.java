@@ -35,9 +35,9 @@ import com.vmware.vim25.VimService;
 
 /**
  * Wrapper over the vSphere API
- * 
+ *
  * @author Yuval Kohavi, yuval.kohavi@intigua.com
- * 
+ *
  */
 public class VSphereClient implements Closeable {
 
@@ -58,7 +58,7 @@ public class VSphereClient implements Closeable {
 	public String getServer() {
 		return server;
 	}
-	
+
 	boolean isConnected() {
 		return connected;
 	}
@@ -88,7 +88,7 @@ public class VSphereClient implements Closeable {
 
 	/**
 	 * Establishes session with the vSphere server.
-	 * 
+	 *
 	 * @throws RuntimeFaultFaultMsg
 	 * @throws InvalidLoginFaultMsg
 	 * @throws InvalidLocaleFaultMsg
@@ -165,9 +165,9 @@ public class VSphereClient implements Closeable {
 
 	/**
 	 * Disconnects the user session.
-	 * 
+	 *
 	 * @throws RuntimeFaultFaultMsg
-	 * 
+	 *
 	 */
 	public void disconnect() throws RuntimeFaultFaultMsg {
 		if (connected) {
@@ -181,7 +181,7 @@ public class VSphereClient implements Closeable {
 	public ManagedObjectReference findVmByUuid(String uuid, boolean instanceUuid) throws RuntimeFaultFaultMsg {
 		return vimPort.findByUuid(this.serviceContent.getSearchIndex(), null, uuid, true, instanceUuid);
 	}
-	
+
 	public ManagedObjectReference findVmByIp(String ip) throws RuntimeFaultFaultMsg {
 		return vimPort.findByIp(this.serviceContent.getSearchIndex(), null, ip, true);
 	}

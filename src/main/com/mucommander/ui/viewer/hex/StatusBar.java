@@ -18,7 +18,7 @@
 
 package com.mucommander.ui.viewer.hex;
 
-import com.mucommander.ui.main.statusbar.FileWindowsListButton;
+// import com.mucommander.ui.main.statusbar.FileWindowsListButton;
 import org.fife.ui.StatusBarPanel;
 import ru.trolsoft.utils.StrUtils;
 
@@ -31,7 +31,7 @@ import java.awt.GridBagConstraints;
  *
  */
 public class StatusBar extends org.fife.ui.StatusBar {
-    private FileWindowsListButton lbFiles;
+    // private FileWindowsListButton lbFiles;
 
     private JLabel lblOffset;
     private JLabel lblEncoding;
@@ -43,9 +43,9 @@ public class StatusBar extends org.fife.ui.StatusBar {
     public StatusBar() {
         super("");
 
-        lbFiles = new FileWindowsListButton(true);
-        StatusBarPanel panelWindows = new StatusBarPanel(new BorderLayout());
-        panelWindows.add(lbFiles);
+        // lbFiles = new FileWindowsListButton(true);
+        // StatusBarPanel panelWindows = new StatusBarPanel(new BorderLayout());
+        // panelWindows.add(lbFiles);
 
         lblOffset = createLabel();
         StatusBarPanel panelOffset = new StatusBarPanel(new BorderLayout(), lblOffset);
@@ -61,7 +61,7 @@ public class StatusBar extends org.fife.ui.StatusBar {
         c.fill = GridBagConstraints.BOTH;
 
         c.weightx = 0.0;
-        addStatusBarComponent(panelWindows, c);
+        // addStatusBarComponent(panelWindows, c);
         addStatusBarComponent(panelOffset, c);
         addStatusBarComponent(panelValue, c);
         addStatusBarComponent(panelEncoding, c);

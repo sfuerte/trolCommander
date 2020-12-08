@@ -18,6 +18,8 @@
 package com.mucommander.ui.terminal;
 
 import ch.qos.logback.classic.BasicConfigurator;
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 import com.jediterm.terminal.RequestOrigin;
 import com.jediterm.terminal.TtyConnector;
 import com.jediterm.terminal.model.StyleState;
@@ -62,7 +64,10 @@ public class MuTerminal {
         }
         this.ttyConnector = createTtyConnector(getCurrentFolder());
 
-        BasicConfigurator.configureDefaultContext();
+        Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        BasicConfigurator bc = new BasicConfigurator();
+        bc.setContext(root.getLoggerContext());
+        bc.configure(root.getLoggerContext());
 
         termWidget = new JediTermWidget(settingsProvider) {
             @Override

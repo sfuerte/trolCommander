@@ -66,7 +66,7 @@ import ru.trolsoft.ui.TMenuSeparator;
 
 
 /**
- * A simple image viewer, capable of displaying <code>PNG</code>, <code>GIF</code> and <code>JPEG</code> images. 
+ * A simple image viewer, capable of displaying <code>PNG</code>, <code>GIF</code> and <code>JPEG</code> images.
  *
  * @author Maxence Bernard, Arik Hadas, Oleg Trifonov
  */
@@ -80,7 +80,7 @@ class ImageViewer extends FileViewer implements ActionListener {
     //private BufferedImage scaledImage;
     private double zoomFactor;
     private boolean vectorImage;
-	
+
     /** Menu bar */
     // Menus //
     private JMenu controlsMenu;
@@ -107,19 +107,19 @@ class ImageViewer extends FileViewer implements ActionListener {
 
     static {
         IIORegistry registry = IIORegistry.getDefaultInstance();
-        registry.registerServiceProvider(new com.realityinteractive.imageio.tga.TGAImageReaderSpi());
+        registry.registerServiceProvider(new com.twelvemonkeys.imageio.plugins.tga.TGAImageReaderSpi());
     }
 
 
     ImageViewer() {
     	imageViewerImpl = new ImageViewerImpl();
-    	
+
     	setComponentToPresent(imageViewerImpl);
-    	
+
     	// create Go menu
     	MnemonicHelper menuMnemonicHelper = new MnemonicHelper();
     	controlsMenu = MenuToolkit.addMenu(i18n("image_viewer.controls_menu"), menuMnemonicHelper, null);
-    	
+
         nextImageItem = MenuToolkit.addMenuItem(controlsMenu, i18n("image_viewer.next_image"), menuMnemonicHelper, KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), this);
         prevImageItem = MenuToolkit.addMenuItem(controlsMenu, i18n("image_viewer.previous_image"), menuMnemonicHelper, KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), this);
         controlsMenu.add(new TMenuSeparator());
@@ -131,14 +131,14 @@ class ImageViewer extends FileViewer implements ActionListener {
             zoomOutItem = MenuToolkit.addMenuItem(controlsMenu, i18n("image_viewer.zoom_out"), menuMnemonicHelper, KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, 0), this);
         }
     }
-    
+
     @Override
     public JMenuBar getMenuBar() {
     	JMenuBar menuBar = super.getMenuBar();
-    	
+
         menuBar.add(controlsMenu);
         setMainKeyListener(imageViewerImpl, menuBar);
-    	
+
     	return menuBar;
     }
 
@@ -263,7 +263,7 @@ class ImageViewer extends FileViewer implements ActionListener {
         }
     }
 
-	
+
 
     private synchronized void zoom(double factor) {
         setFrameCursor(CURSOR_WAIT);
@@ -330,7 +330,7 @@ class ImageViewer extends FileViewer implements ActionListener {
 
     private void checkZoom() {
 //        Dimension d = MuSnapshot.getScreenSize();
-		
+
 //        zoomInItem.setEnabled(zoomFactor < 1.0 || (2*zoomFactor*image.getWidth(null) < d.width
 //                                                 && 2*zoomFactor*image.getHeight(null) < d.height));
 //
@@ -535,16 +535,16 @@ class ImageViewer extends FileViewer implements ActionListener {
     private class ImageViewerImpl extends JPanel implements MouseMotionListener, MouseListener, ThemeListener {
 
     	private Color backgroundColor;
-    	
 
-    	
+
+
     	ImageViewerImpl() {
     		backgroundColor = ThemeManager.getCurrentColor(Theme.EDITOR_BACKGROUND_COLOR);
             ThemeManager.addCurrentThemeListener(this);
             addMouseListener(this);
             addMouseMotionListener(this);
         }
-    	
+
     	////////////////////////
         // Overridden methods //
         ////////////////////////
@@ -597,12 +597,12 @@ class ImageViewer extends FileViewer implements ActionListener {
                 }
             }
         }
-        
+
         @Override
         public synchronized Dimension getPreferredSize() {
             return image == null ? new Dimension(320, 200) : new Dimension(getScaledWidth(), getScaledHeight());
         }
-    	
+
     	//////////////////////////////////
         // ThemeListener implementation //
         //////////////////////////////////

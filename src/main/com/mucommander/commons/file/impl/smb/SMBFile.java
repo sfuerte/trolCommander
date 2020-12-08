@@ -4,6 +4,8 @@ import com.mucommander.commons.file.*;
 import com.mucommander.commons.file.filter.FilenameFilter;
 import com.mucommander.commons.io.RandomAccessInputStream;
 import com.mucommander.commons.io.RandomAccessOutputStream;
+import jcifs.CIFSContext;
+import jcifs.context.BaseContext;
 import jcifs.smb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.util.Properties;
 
 
 /**
@@ -49,7 +52,7 @@ import java.net.MalformedURLException;
      *  be changed. */
     private final static PermissionBits CHANGEABLE_PERMISSIONS = new GroupedPermissionBits(128);   // -w------- (200 octal)
 
-    
+
     SMBFile(FileURL fileURL) throws IOException {
         this(fileURL, null);
     }
@@ -129,8 +132,11 @@ import java.net.MalformedURLException;
         // A NtlmPasswordAuthentication is created from the FileURL credentials and passed to a specific SmbFile constructor.
         // The reason for doing this rather than using the SmbFile(String) constructor is that SmbFile uses java.net.URL
         // for the URL parsing which is unable to properly parse urls where the password contains a '@' character,
-        // such as smb://user:p@ssword@host/path . 
-        return new SmbFile(url.toString(false), new NtlmPasswordAuthentication(domain, login, credentials.getPassword()));
+        // such as smb://user:p@ssword@host/path .
+        byte[] hash = NtlmUtil.getNTHash(credentials.getPassword());
+        CIFSContext ctx = new BaseContext(null).withCredentials(new NtlmNtHashAuthenticator(domain, login, hash));
+        return new SmbFile(url.toString(false), ctx);
+        // return new SmbFile(url.toString(false), new NtlmPasswordAuthentication(null, domain, login, credentials.getPassword()).getContext());
     }
 
 
@@ -171,7 +177,9 @@ import java.net.MalformedURLException;
      * @param period time period during which attributes values are cached, in milliseconds
      */
     static void setAttributeCachingPeriod(long period) {
-        jcifs.Config.setProperty("jcifs.smb.client.attrExpirationPeriod", ""+period);
+        Properties p = new Properties();
+        p.putAll(System.getProperties());
+        p.setProperty("jcifs.smb.client.attrExpirationPeriod", ""+period);
     }
 
 
@@ -618,7 +626,7 @@ import java.net.MalformedURLException;
             raf.setLength(newLength);
 
             // jCIFS doesn't automatically position the offset to the end of the file when it is truncated.
-            // We have to do it ourselves to honour this method's contract.   
+            // We have to do it ourselves to honour this method's contract.
             if(getOffset()>newLength)
                 raf.seek(newLength);
         }

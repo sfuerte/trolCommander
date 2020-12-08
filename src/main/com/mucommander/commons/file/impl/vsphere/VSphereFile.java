@@ -28,38 +28,38 @@ import java.util.*;
 /**
  * VSphereFile provides access to files on virtual machines on vSphere 5+
  * servers.
- * 
+ *
  * <p>
  * The associated {@link FileURL} scheme is {@link FileProtocols#VSPHERE}. The
  * host part of the URL designates the vSphere server. Credentials must be
  * specified in the login and password parts as vSphere servers require a login
  * and password. The path separator is '/', even on windows virtual machines.
- * 
+ *
  * The first path of the path is the identifier of the guest VM (see below) we
  * want to access. That part may also contain username and password for the
  * guest VMs - though it is less secure, so it is better to use the GUI dialog.
- * 
+ *
  * Note that the machine credentials cab also be set as a property named
  * "guestCredentials" of this object.
- * 
+ *
  * The identifier of a VM can be one of the following: - Instance UUID - BIOS
  * UUID - IP address
- * 
+ *
  * Note that even if you use IP to identify the machine, you don't need network
  * connectivity for accessing the machine. all access is done via vSphere APIs.
- * 
+ *
  * <p>
  * Here are a few examples of valid vSphere URLs: <code>
  * vsphere://vsphere5-server/501fc8db-f9dc-562b-6310-3c6b7ace2377/C:<br>
  * vsphere://admin:pass@vsphere5-server/501fc8db-f9dc-562b-6310-3c6b7ace2377/C:<br>
  * vsphere://admin:pass@vsphere5-server/guestadmin:guestpass@501fc8db-f9dc-562b-6310-3c6b7ace2377/C:<br>
  * </code>
- * 
+ *
  * <p>
  * Access to vSphere files is provided by the <code>vim25</code> library
  * distributed under the VMware Software Development Kit (SDK) License
  * Agreement. See: http://www.vmware.com/go/vwssdk-redistribution-info
- * 
+ *
  * @see ConnectionPool
  * @author Yuval Kohavi, yuval.kohavi@intigua.com
  */
@@ -619,11 +619,11 @@ public class VSphereFile extends ProtocolFile implements
 
 	/**
 	 * vSphere APIs require the file size when copying a file.
-	 * 
+	 *
 	 * mucommander enables file copy with known size, and also with unknown
 	 * size. This class supports the unknown size use case. It saves all the
 	 * data to a temp file and copies it on close, when its size is known.
-	 * 
+	 *
 	 */
 	public class VSphereOutputStream extends FileOutputStream {
 

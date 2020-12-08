@@ -2,18 +2,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<!-- parent pom -->
 	<groupId>ru.trolsoft</groupId>
 	<artifactId>trolcommander</artifactId>
 	<version>0.9.9</version>
 	<name>trolCommander</name>
 	<description>Two panel filemanager</description>
 	<url>${github.url}</url>
+
 	<licenses>
 		<license>
 			<name>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</name>
 			<url>http://www.gnu.org/licenses/gpl-3.0.en.html</url>
 		</license>
 	</licenses>
+
 	<developers>
 		<developer>
 			<name>Oleg Trifonow</name>
@@ -21,27 +24,123 @@
 			<organizationUrl>http://trolsoft.ru/en</organizationUrl>
 		</developer>
 	</developers>
+
+	<!-- sub modules -->
+	<!-- <modules>
+			<module>jnilib</module>
+	</modules> -->
+
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<encoding>UTF-8</encoding>
-		<source.java.version>1.8</source.java.version>
-		<target.java.version>1.8</target.java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.runtimeArtifacts>com.mucommander.TrolCommander</project.runtimeArtifacts>
+		<project.main.class>com.mucommander.TrolCommander</project.main.class>
+
 		<github.user>trol73</github.user>
 		<github.repo>mucommander</github.repo>
 		<github.url>https://github.com/${github.user}/${github.repo}</github.url>
+
 		<bintray.user>trol73</bintray.user>
 		<bintray.repo>maven</bintray.repo>
 		<bintray.package>trolcommander</bintray.package>
+
 		<libs.path>${project.basedir}/assembly/lib</libs.path>
 		<libs.runtime.path>${project.basedir}/lib/runtime</libs.runtime.path>
-		<hadoop.version>1.2.1</hadoop.version>
-		<hadoop.common.version>2.5.1</hadoop.common.version>
-		<guava.version>11.0.2</guava.version>
-		<protobuf.version>2.4.1</protobuf.version>
-		<lucene.version>7.1.0</lucene.version>
-		<slf4j.version>1.6.4</slf4j.version>
+    <skipTests>true</skipTests>
+
+		<!-- Dependencies -->
+		<dep.applejavaextensions.version>1.4</dep.applejavaextensions.version>
+		<dep.commons-io.version>2.8.0</dep.commons-io.version>
+		<dep.commons-collections4.version>4.4</dep.commons-collections4.version>
+		<dep.javafx.version>11.0.2</dep.javafx.version>
+		<dep.jna.version>5.6.0</dep.jna.version>
+		<dep.jaxws-rt.version>3.0.0</dep.jaxws-rt.version>
+
+		<!-- TODO: update to the latest, requires changes in keyListner as per https://github.com/JetBrains/jediterm/commit/8b8ad257fd8d9dbf9b48c1a13e01b0487b54d66f#diff-76e325d57ca57beda2f9865a978d931d26c31b91b1cba7896eb015ac4ec741d0 -->
+		<dep.jediterm-pty.version>2.12</dep.jediterm-pty.version>
+		<dep.pty4j.version>0.11.3</dep.pty4j.version>
+		<dep.fifesoft.version>3.1.1</dep.fifesoft.version>
+		<dep.jetbrains-annotations.version>20.1.0</dep.jetbrains-annotations.version>
+
+		<!-- Protocols -->
+		<dep.commons-net.version>3.7.2</dep.commons-net.version>
+		<dep.j2ssh-maverick.version>1.5.5</dep.j2ssh-maverick.version>
+		<dep.jmdns.version>3.5.6</dep.jmdns.version>
+		<dep.jftp.version>1.60-trol1</dep.jftp.version>
+		<dep.yanfs.version>1.4</dep.yanfs.version>
+		<dep.jcifs.version>2.1.22</dep.jcifs.version>
+		<!-- TODO: upgrade, incompatibale change at 0.8.x -->
+		<dep.jets3t.version>0.7.4</dep.jets3t.version>
+		<dep.hadoop.version>3.3.0</dep.hadoop.version>
+		<dep.sardine.version>5.10</dep.sardine.version>
+
+		<!-- Formats: archives -->
+		<dep.sevenzipjbinding.version>16.02-2.01</dep.sevenzipjbinding.version>
+		<dep.junrar.version>7.4.0</dep.junrar.version>
+		<dep.stephenc-iso9660.version>2.0.1</dep.stephenc-iso9660.version>
+
+		<!-- Formats: images -->
+		<dep.twelvemonkeys.imageio-tga.version>3.6.1</dep.twelvemonkeys.imageio-tga.version>
+		<dep.image4j.version>0.7.2</dep.image4j.version>
+		<!-- <dep.batik-transcoder.version>1.13</dep.batik-transcoder.version> -->
+		<dep.sanselan.version>0.97-incubator</dep.sanselan.version>
+
+		<!-- Formats: misc -->
+		<dep.icepdf.version>6.2.2</dep.icepdf.version>
+		<dep.gson.version>2.8.6</dep.gson.version>
+		<dep.org.json.version>20201115</dep.org.json.version>
+		<!-- <dep.jsoup.version>1.13.1</dep.jsoup.version> -->
+		<dep.xerces.version>2.12.0</dep.xerces.version>
+
+		<dep.jide-oss.version>3.6.18</dep.jide-oss.version>
+		<dep.logback.version>1.2.3</dep.logback.version>
+		<!-- <dep.slf4j.version>2.0.0-alpha1</dep.slf4j.version> -->
+
+		<!-- <guava.version>30.0-jre</guava.version> -->
+		<!-- <protobuf.version>4.0.0-rc-2</protobuf.version> -->
+		<!-- <lucene.version>8.7.0</lucene.version> -->
+
+
+		<!-- Testing -->
+		<dep.junit.version>4.13.1</dep.junit.version>
+		<dep.testng.version>6.8.8</dep.testng.version>
+
+
+		<!-- Build plugins -->
+		<plugin.maven-compiler.version>3.8.1</plugin.maven-compiler.version>
+		<plugin.maven-resources.version>3.2.0</plugin.maven-resources.version>
+		<plugin.maven-dependency.version>3.1.2</plugin.maven-dependency.version>
+		<plugin.maven-jar.version>3.2.0</plugin.maven-jar.version>
+		<plugin.maven-surefire.version>3.0.0-M5</plugin.maven-surefire.version>
+		<plugin.maven-jar.version>3.2.0</plugin.maven-jar.version>
+		<plugin.maven-assembly.version>3.3.0</plugin.maven-assembly.version>
+		<plugin.osxappbundle.version>1.0.1</plugin.osxappbundle.version>
+		<plugin.dstovall.onejar.version>1.4.4</plugin.dstovall.onejar.version>
+
+		<!-- Profile: `format` -->
+		<plugin.revelc.formatter.version>2.13.0</plugin.revelc.formatter.version>
+
+		<!-- Profile: `release` -->
+		<plugin.maven-source.version>3.2.1</plugin.maven-source.version>
+
+		<!-- Profile: `security-check` -->
+		<plugin.owasp.dependency-check.version>6.0.3</plugin.owasp.dependency-check.version>
+
+		<!-- Profile: `code-check` -->
+		<plugin.codehaus.javancss.version>2.1</plugin.codehaus.javancss.version>
+		<plugin.codehaus.jdepend.version>2.0</plugin.codehaus.jdepend.version>
+		<plugin.apache.maven-checkstyle.version>3.1.1</plugin.apache.maven-checkstyle.version>
+		<plugin.apache.maven-pmd.version>3.14.0</plugin.apache.maven-pmd.version>
+		<plugin.github.spotbugs.version>4.1.4</plugin.github.spotbugs.version>
+		<dep.puppycrawl.checkstyle.version>8.38</dep.puppycrawl.checkstyle.version>
+		<dep.pmd.version>6.29.0</dep.pmd.version>
+		<dep.jdepend.version>2.9.5</dep.jdepend.version>
+
+		<!-- Profile: `code-coverage` -->
+		<plugin.jacoco.version>0.8.6</plugin.jacoco.version>
+
 	</properties>
 
 	<scm>
@@ -50,21 +149,23 @@
 		<url>${github.url}</url>
 		<tag>HEAD</tag>
 	</scm>
+
 	<distributionManagement>
 		<repository>
 			<id>bintray</id>
 			<url>https://api.bintray.com/maven/${bintray.user}/${bintray.repo}/${bintray.package}</url>
 		</repository>
 	</distributionManagement>
+
+
 	<dependencies>
-		<!-- Dirty hack: there is no place to download it from -->
+		<!-- https://mvnrepository.com/artifact/com.sun/yanfs -->
 		<dependency>
-			<groupId>yanfs</groupId>
-			<artifactId>yanfs</artifactId>
-			<version>1.2</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/yanfs-1.2.jar</systemPath>
+				<groupId>com.sun</groupId>
+				<artifactId>yanfs</artifactId>
+				<version>${dep.yanfs.version}</version>
 		</dependency>
+		<!-- TODO: com.lizardtech.djvubean -->
 		<dependency>
 			<groupId>javadjvu</groupId>
 			<artifactId>javadjvu</artifactId>
@@ -72,56 +173,73 @@
 			<scope>system</scope>
 			<systemPath>${libs.path}/javadjvu.jar</systemPath>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jetbrains.jediterm/jediterm-pty -->
 		<dependency>
-			<groupId>jediterm</groupId>
+			<groupId>org.jetbrains.jediterm</groupId>
 			<artifactId>jediterm-pty</artifactId>
-			<version>2.0</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/jediterm-pty-2.0.jar</systemPath>
+			<version>${dep.jediterm-pty.version}</version>
 		</dependency>
-		<dependency>
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>jediterm</groupId>
 			<artifactId>purejavacomm</artifactId>
 			<version>0.0.22</version>
 			<scope>system</scope>
 			<systemPath>${libs.runtime.path}/jediterm/purejavacomm-0.0.22.jar</systemPath>
-		</dependency>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.jetbrains.pty4j/pty4j -->
 		<dependency>
-			<groupId>pty4j</groupId>
+			<groupId>org.jetbrains.pty4j</groupId>
 			<artifactId>pty4j</artifactId>
-			<version>0.3</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/pty4j-0.3.jar</systemPath>
+			<version>${dep.pty4j.version}</version>
 		</dependency>
-		<dependency>
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>pty4j</groupId>
 			<artifactId>pty4j-native</artifactId>
 			<version>0.3</version>
 			<scope>system</scope>
 			<systemPath>${libs.path}/pty4j-native.jar</systemPath>
-		</dependency>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.icepdf.os/icepdf-viewer -->
 		<dependency>
-			<groupId>org.icepdf</groupId>
+			<groupId>org.icepdf.os</groupId>
 			<artifactId>icepdf-viewer</artifactId>
-			<version>5.0.4_8</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/icepdf-viewer.jar</systemPath>
+			<version>${dep.icepdf.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.media</groupId>
+					<artifactId>jai_core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.icepdf</groupId>
+			<groupId>org.icepdf.os</groupId>
 			<artifactId>icepdf-core</artifactId>
-			<version>5.0.4_8</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/icepdf-core.jar</systemPath>
+			<version>${dep.icepdf.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.media</groupId>
+					<artifactId>jai_core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.twelvemonkeys.imageio/imageio-tga -->
 		<dependency>
-			<groupId>com.realityinteractive</groupId>
-			<artifactId>imageio-tga</artifactId>
-			<version>0.1</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/com.realityinteractive.imageio.tga.jar</systemPath>
+				<groupId>com.twelvemonkeys.imageio</groupId>
+				<artifactId>imageio-tga</artifactId>
+				<version>${dep.twelvemonkeys.imageio-tga.version}</version>
 		</dependency>
-		<dependency>
+		<!-- TODO: not supported anymore, replace with updated forks and build locally? -->
+		<!-- https://github.com/wrandelshofer/Quaqua -->
+		<!-- https://mvnrepository.com/artifact/org.violetlib/vaqua -->
+		<!-- <dependency>
+				<groupId>org.violetlib</groupId>
+				<artifactId>vaqua</artifactId>
+				<version>8</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.devzendo/Quaqua -->
+		<!-- <dependency>
 			<groupId>org.devzendo</groupId>
 			<artifactId>Quaqua</artifactId>
 			<version>7.3.4</version>
@@ -134,9 +252,7 @@
 			<version>7.3.4</version>
 			<scope>system</scope>
 			<systemPath>${libs.path}/quaqua-native.jar</systemPath>
-		</dependency>
-		<!-- <dependency> <groupId>org.devzendo</groupId> <artifactId>Quaqua</artifactId> 
-			<version>7.3.4</version> </dependency> -->
+		</dependency> -->
 
 		<dependency>
 			<!-- Dirty hack: there is no place to download it from -->
@@ -154,222 +270,208 @@
 			<scope>system</scope>
 			<systemPath>${libs.path}/ui.jar</systemPath>
 		</dependency>
-		<!-- <dependency> <groupId>javafx</groupId> <artifactId>javafx</artifactId> 
-			<version>2.1</version> <scope>system</scope> <systemPath>${libs.path}/ui.jar</systemPath> 
-			</dependency> -->
-		<!-- <dependency> <groupId>com.apple</groupId> <artifactId>AppleJavaExtensions</artifactId> 
-			<version>1.4</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.apple/AppleJavaExtensions -->
 		<dependency>
 			<groupId>com.apple</groupId>
 			<artifactId>AppleJavaExtensions</artifactId>
-			<version>1.6</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/AppleJavaExtensions-1.6.jar</systemPath>
+			<version>${dep.applejavaextensions.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.sevenzipjbinding/sevenzipjbinding -->
 		<dependency>
-			<!-- Dirty hack: there is no place to download it from -->
-			<groupId>sevenzipjbinding</groupId>
+			<groupId>net.sf.sevenzipjbinding</groupId>
 			<artifactId>sevenzipjbinding</artifactId>
-			<version>1.7</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/sevenzipjbinding.jar</systemPath>
+			<version>${dep.sevenzipjbinding.version}</version>
 		</dependency>
 		<dependency>
-			<!-- Dirty hack: there is no place to download it from -->
-			<groupId>sevenzipjbinding</groupId>
-			<artifactId>sevenzipjbinding-AllPlatforms</artifactId>
-			<version>1.7</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/sevenzipjbinding-AllPlatforms.jar</systemPath>
+			<groupId>net.sf.sevenzipjbinding</groupId>
+			<artifactId>sevenzipjbinding-all-platforms</artifactId>
+			<version>${dep.sevenzipjbinding.version}</version>
 		</dependency>
-		<dependency>
+		<!-- TODO: outdated & not in use? -->
+		<!-- https://mvnrepository.com/artifact/sshtools/j2ssh-core -->
+		<!-- <dependency>
 			<groupId>sshtools</groupId>
 			<artifactId>j2ssh-core</artifactId>
-			<!-- <version>0.2.9</version> -->
-			<version>0.2.10</version>
-			<scope>system</scope>
-			<systemPath>${libs.path}/j2ssh-core-0.2.10.jar</systemPath>
-		</dependency>
+			<version>0.2.9</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.sshtools/j2ssh-maverick -->
 		<dependency>
 			<groupId>com.sshtools</groupId>
 			<artifactId>j2ssh-maverick</artifactId>
-			<version>1.5.5</version>
-			<scope>system</scope>
-			<systemPath>${libs.runtime.path}/sshtools/j2ssh-maverick-1.5.5.jar</systemPath>
+			<version>${dep.j2ssh-maverick.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.java.dev.jets3t/jets3t -->
 		<dependency>
 			<groupId>net.java.dev.jets3t</groupId>
 			<artifactId>jets3t</artifactId>
-			<version>0.7.2</version>
-			<!--<version>0.9.0</version> -->
+			<version>${dep.jets3t.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fifesoft.rtext/fife.common -->
 		<dependency>
 			<groupId>com.fifesoft.rtext</groupId>
 			<artifactId>fife.common</artifactId>
-			<version>2.5.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jclarion</groupId>
-			<artifactId>image4j</artifactId>
-			<version>0.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jetbrains</groupId>
-			<artifactId>annotations</artifactId>
-			<version>13.0</version>
+			<version>${dep.fifesoft.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fifesoft</groupId>
-    			<artifactId>rsyntaxtextarea</artifactId>
-               <version>2.6.1</version>
-<!--               
-			<systemPath>${libs.runtime.path}/rsyntaxtextarea-2.6.0-SNAPSHOT.jar</systemPath>
--->
+			<artifactId>rsyntaxtextarea</artifactId>
+			<version>${dep.fifesoft.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.imcdonagh/image4j -->
 		<dependency>
+				<groupId>com.github.imcdonagh</groupId>
+				<artifactId>image4j</artifactId>
+				<version>${dep.image4j.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+			<version>${dep.jetbrains-annotations.version}</version>
+		</dependency>
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-transcoder</artifactId>
-			<version>1.8</version>
-		</dependency>
+			<version>${dep.batik-transcoder.version}</version>
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.sanselan</groupId>
 			<artifactId>sanselan</artifactId>
-			<version>0.97-incubator</version>
+			<version>${dep.sanselan.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.junrar</groupId>
 			<artifactId>junrar</artifactId>
-			<version>3.0.1</version>
+			<version>${dep.junrar.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>sshtools</groupId> <artifactId>j2ssh-core</artifactId> 
-			<version>0.2.10</version> </dependency> -->
+		<!-- TODO: revert to official source once it's resolved https://github.com/jidesoft/jide-oss/issues/27 -->
 		<dependency>
 			<groupId>com.jidesoft</groupId>
 			<artifactId>jide-oss</artifactId>
-			<version>3.6.11</version>
+      <version>${dep.jide-oss.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
-			<version>3.3</version>
+			<version>${dep.commons-net.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
-			<version>4.1</version>
+			<version>${dep.commons-collections4.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.3</version>
+			<version>${dep.gson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
-			<version>2.11.0</version>
+			<version>${dep.xerces.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna-platform</artifactId>
-			<version>4.2.0</version>
+			<version>${dep.jna.version}</version>
 		</dependency>
-		<dependency>
+		<!-- TODO: no need? -->
+		<!-- <dependency>
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna</artifactId>
-			<version>4.2.0</version>
-		</dependency>
-		<!-- <dependency> <groupId>com.sun.jna</groupId> <artifactId>jna</artifactId> 
-			<version>3.0.9</version> </dependency> <dependency> <groupId>net.java.dev.jna</groupId> 
-			<artifactId>jna</artifactId> <version>3.2.1</version> </dependency> -->
+			<version>${dep.jna.version}</version>
+		</dependency> -->
 		<!-- taken from https://code.google.com/p/aether-framework/source/browse/trunk/aether-examples/mu-commander/pom.xml?r=96 -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId>
 			<version>1.6.4</version> </dependency> -->
 
-		<dependency>
+		<!-- TODO: no need -->
+		<!-- <dependency>
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant-nodeps</artifactId>
 			<version>1.8.1</version>
-		</dependency>
+		</dependency> -->
 
+		<!-- https://mvnrepository.com/artifact/org.jmdns/jmdns -->
 		<dependency>
-			<groupId>javax.jmdns</groupId>
+			<groupId>org.jmdns</groupId>
 			<artifactId>jmdns</artifactId>
-			<version>3.2.2</version>
+			<version>${dep.jmdns.version}</version>
 		</dependency>
 		<!-- <version>3.9.2</version> <version>3.2.2</version> 3.1 <version>3.4.1</version> -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
+			<version>${dep.commons-io.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codelibs/jcifs -->
 		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>3.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.samba.jcifs</groupId>
+			<groupId>org.codelibs</groupId>
 			<artifactId>jcifs</artifactId>
-			<version>1.2.9</version>
+			<version>${dep.jcifs.version}</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>SevenZip</groupId> <artifactId>J7Zip</artifactId> 
+		<!-- <dependency> <groupId>SevenZip</groupId> <artifactId>J7Zip</artifactId>
 			<version>3.0</version> </dependency> -->
 		<dependency>
 			<groupId>org.objectweb.joram</groupId>
 			<artifactId>jftp</artifactId>
-			<version>1.60-trol1</version>
+			<version>${dep.jftp.version}</version>
 			<scope>system</scope>
 			<systemPath>${libs.runtime.path}/jftp-1.60-trol1.jar</systemPath>
 		</dependency>
 
-		<dependency>
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
-			<version>4.0.1</version>
-		</dependency>
+			<version>68.1</version>
+		</dependency> -->
 
 
-
-
-		<dependency>
-			<groupId>com.sun.jna</groupId>
-			<artifactId>jna</artifactId>
-			<version>3.0.9</version>
-		</dependency>
-		<!-- <dependency> <groupId>com.vmware</groupId> <artifactId>vijava</artifactId> 
-			<version>5.1</version> </dependency> <dependency> <groupId>com.cloudbees.thirdparty</groupId> 
+		<!-- <dependency> <groupId>com.vmware</groupId> <artifactId>vijava</artifactId>
+			<version>5.1</version> </dependency> <dependency> <groupId>com.cloudbees.thirdparty</groupId>
 			<artifactId>vijava</artifactId> <version>5.0.0</version> </dependency> -->
 		<!--before -->
-		<dependency>
+		<!-- TODO: not in use? -->
+		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<!-- <dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.8.1</version>
-		</dependency>
-		<dependency>
+			<version>${dep.jsoup.version}</version>
+		</dependency> -->
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>com.osbcp</groupId>
 			<artifactId>cssparser</artifactId>
 			<version>1.7</version>
-		</dependency>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.8.8</version>
+			<version>${dep.testng.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<version>${dep.junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>org.simplericity.macify</groupId>
 			<artifactId>macify</artifactId>
 			<version>1.6</version>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
 			<version>${lucene.version}</version>
@@ -383,74 +485,67 @@
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-queryparser</artifactId>
 			<version>${lucene.version}</version>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- TODO: not in use directly? deps by Hadoop -->
+		<!-- <dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>
 			<version>${protobuf.version}</version>
-		</dependency>
+		</dependency> -->
 
-		<dependency>
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-
-		<dependency>
+			<version>1.2</version>
+		</dependency> -->
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>commons-cli</groupId>
 			<artifactId>commons-cli</artifactId>
-			<version>1.2</version>
-		</dependency>
-
-		<dependency>
+			<version>1.4</version>
+		</dependency> -->
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-		</dependency>
+			<version>2.6</version>
+		</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.1.3</version>
+			<version>${dep.logback.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.1.3</version>
-		</dependency>
-		<!-- <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
-			<version>0.9.20</version> </dependency> <dependency> <groupId>ch.qos.logback</groupId> 
-			<artifactId>logback-core</artifactId> <version>0.9.20</version> </dependency> -->
-		<dependency>
+		<!-- TODO: not in use directly? deps of logback -->
+		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
+			<version>${dep.slf4j.version}</version>
+		</dependency> -->
+		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>log4j-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
+			<version>${dep.slf4j.version}</version>
+		</dependency> -->
+		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
+			<version>${dep.slf4j.version}</version>
+		</dependency> -->
+		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jul-to-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
+			<version>${dep.slf4j.version}</version>
+		</dependency> -->
 
 		<!-- Hadoop -->
-		<!-- <dependency> <groupId>org.apache.hadoop</groupId> <artifactId>hadoop-core</artifactId> 
-			<version>${hadoop.version}</version> <exclusions> <exclusion> <groupId>net.java.dev.jets3t</groupId> 
-			<artifactId>jets3t</artifactId> </exclusion> </exclusions> </dependency> -->
-		<!-- <dependency> <groupId>org.apache.hadoop</groupId> <artifactId>hadoop-core</artifactId> 
-			<version>0.20.2</version> </dependency> -->
-		<dependency>
+		<!-- TODO: not in use directly? -->
+		<!-- <dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-auth</artifactId>
-			<version>${hadoop.common.version}</version>
+			<version>${dep.hadoop.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>log4j</groupId>
@@ -460,16 +555,13 @@
 					<groupId>org.slf4j</groupId>
 					<artifactId>slf4j-log4j12</artifactId>
 				</exclusion>
-				<exclusion>
-					<groupId>net.java.dev.jets3t</groupId>
-					<artifactId>jets3t</artifactId>
-				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.apache.hadoop -->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
-			<version>${hadoop.common.version}</version>
+			<version>${dep.hadoop.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>log4j</groupId>
@@ -478,17 +570,13 @@
 				<exclusion>
 					<groupId>org.slf4j</groupId>
 					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>net.java.dev.jets3t</groupId>
-					<artifactId>jets3t</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-hdfs</artifactId>
-			<version>${hadoop.common.version}</version>
+			<version>${dep.hadoop.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>tomcat</groupId>
@@ -498,93 +586,136 @@
 					<groupId>log4j</groupId>
 					<artifactId>log4j</artifactId>
 				</exclusion>
-				<exclusion>
-					<groupId>net.java.dev.jets3t</groupId>
-					<artifactId>jets3t</artifactId>
-				</exclusion>
 			</exclusions>
 		</dependency>
 
-		<dependency>
+		<!-- TODO: not in use directly? deps of org.jetbrains.pty4j -->
+		<!-- <dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- TODO: not in use -->
+		<!-- <dependency>
 			<groupId>com.mashape.unirest</groupId>
 			<artifactId>unirest-java</artifactId>
-			<version>1.3.26</version>
-		</dependency>
-		<dependency>
+			<version>1.4.9</version>
+		</dependency> -->
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>[4.5.10,)</version>
-			<!--<version>4.3.6</version> -->
+			<version>4.5.13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpasyncclient</artifactId>
-			<version>4.0.1</version>
-			<!--<version>4.0.2</version> -->
+			<version>4.1.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
-			<version>4.3.4</version>
-			<!--<version>4.3.6</version> -->
+			<version>4.5.13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
-			<version>4.3.3</version>
-		</dependency>
+			<version>4.4.13</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20140107</version>
+			<version>${dep.org.json.version}</version>
 		</dependency>
-		<dependency>
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>org.raisercostin</groupId>
 			<artifactId>jedi-io_2.10</artifactId>
 			<version>0.20</version>
-		</dependency>
-		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk</artifactId>
-			<version>1.7.13</version>
-		</dependency>
+		</dependency> -->
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>s3</artifactId>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.github.stephenc.java-iso-tools/iso9660-writer -->
 		<dependency>
 			<groupId>com.github.stephenc.java-iso-tools</groupId>
-			<artifactId>iso9660-maven-plugin</artifactId>
-			<version>2.0.0</version>
+			<artifactId>iso9660-writer</artifactId>
+			<version>${dep.stephenc-iso9660.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.lookfirst/sardine -->
 		<dependency>
 			<groupId>com.github.lookfirst</groupId>
 			<artifactId>sardine</artifactId>
-			<version>5.3</version>
+			<version>${dep.sardine.version}</version>
 		</dependency>
-		<dependency>
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>com.yuvimasory</groupId>
 			<artifactId>orange-extensions</artifactId>
 			<version>1.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>jcifs</groupId>
-			<artifactId>jcifs</artifactId>
-			<version>1.3.17</version>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- TODO: not in use? -->
+		<!-- <dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.19</version>
 			<scope>test</scope>
+		</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-web</artifactId>
+			<version>${dep.javafx.version}</version>
+			<type>pom</type>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.directory.api</groupId> <artifactId>api-all</artifactId> 
-			<version>1.0.0-M31</version> <exclusions> <exclusion> <groupId>log4j</groupId> 
-			<artifactId>log4j</artifactId> </exclusion> <exclusion> <groupId>org.slf4j</groupId> 
-			<artifactId>slf4j-log4j12</artifactId> </exclusion> <exclusion> <groupId>net.java.dev.jets3t</groupId> 
-			<artifactId>jets3t</artifactId> </exclusion> </exclusions> </dependency> -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-swing</artifactId>
+			<version>${dep.javafx.version}</version>
+			<type>pom</type>
+		</dependency>
+
+		<!-- Gone from jvm in java11 -->
+		<!-- JAXB (java.xml.bind) -->
+		<!-- <dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.4.0-b180830.0359</version>
+		</dependency> -->
+		<!-- <dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>3.0.0</version>
+				<scope>runtime</scope>
+		</dependency> -->
+		<!-- <dependency>
+				<groupId>org.glassfish.jaxb</groupId>
+				<artifactId>jaxb-runtime</artifactId>
+				<version>3.0.0</version>
+				<scope>runtime</scope>
+		</dependency> -->
+		<!-- Gone from jvm in java11 -->
+		<!-- JAX-WS (java.xml.ws) -> jakarta.xml.ws -->
+		<!-- API -->
+		<dependency>
+				<groupId>jakarta.xml.ws</groupId>
+				<artifactId>jakarta.xml.ws-api</artifactId>
+				<version>2.3.3</version>
+		</dependency>
+		<!-- Runtime -->
+		<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-rt</artifactId>
+				<version>${dep.jaxws-rt.version}</version>
+				<scope>runtime</scope>
+		</dependency>
 	</dependencies>
+
+
 	<build>
 		<sourceDirectory>src/main</sourceDirectory>
 		<testSourceDirectory>src/test</testSourceDirectory>
@@ -607,28 +738,31 @@
 				<directory>res/runtime</directory>
 			</resource>
 		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>${plugin.maven-compiler.version}</version>
 				<configuration>
-					<source>${source.java.version}</source>
-					<target>${target.java.version}</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
+					<forceJavacCompilerUse>true</forceJavacCompilerUse>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
+				<version>${plugin.maven-resources.version}</version>
 				<configuration>
-					<encoding>UTF-8</encoding>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${plugin.maven-dependency.version}</version>
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
@@ -648,13 +782,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>${plugin.maven-jar.version}</version>
 				<configuration>
 					<!--<finalName>mucommander</finalName> -->
 					<archive>
 						<manifest>
-							<mainClass>com.mucommander.TrolCommander</mainClass>
+							<mainClass>${project.main.class}</mainClass>
 							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
+							<!-- <classpathPrefix>lib/</classpathPrefix> -->
 						</manifest>
 						<manifestEntries>
 							<Specification-Title>${project.name}</Specification-Title>
@@ -669,14 +804,81 @@
 					</archive>
 				</configuration>
 			</plugin>
-			<!-- <plugin> <groupId>io.github.appbundler</groupId> <artifactId>appbundle-maven-plugin</artifactId> 
-				<version>1.0-SNAPSHOT</version> <configuration> <bundleName>muCommander</bundleName> 
-				<mainClass>com.mucommander.Launcher</mainClass> <iconFile>src/main/resources/icon.icns</iconFile> 
-				<jvmVersion>1.7+</jvmVersion> </configuration> - <executions> <execution> 
-				<phase>package</phase> <goals> <goal>bundle</goal> </goals> </execution> 
+			<!-- <plugin> <groupId>io.github.appbundler</groupId> <artifactId>appbundle-maven-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version> <configuration> <bundleName>muCommander</bundleName>
+				<mainClass>com.mucommander.Launcher</mainClass> <iconFile>src/main/resources/icon.icns</iconFile>
+				<jvmVersion>1.7+</jvmVersion> </configuration> - <executions> <execution>
+				<phase>package</phase> <goals> <goal>bundle</goal> </goals> </execution>
 				</executions> - </plugin> -->
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+				<version>${plugin.maven-surefire.version}</version>
+        <configuration>
+          <skipTests>${skipTests}</skipTests>
+        </configuration>
+      </plugin>
+
+			<!-- https://mvnrepository.com/artifact/com.evolvedbinary.appbundler/appbundler -->
+			<!-- https://github.com/evolvedbinary/appbundler-maven-plugin -->
 			<plugin>
+				<groupId>com.evolvedbinary.appbundler</groupId>
+				<artifactId>appbundler-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<!-- <groupId>org.codehaus.mojo</groupId>
+				<artifactId>osxappbundle-maven-plugin</artifactId>
+				<version>1.0-alpha-2</version> -->
+				<executions>
+					<execution>
+						<id>trolCommander</id>
+						<phase>package</phase>
+						<goals>
+							<goal>bundle</goal>
+						</goals>
+						<configuration>
+							<!-- writeInfoPlist - https://github.com/evolvedbinary/appbundler-maven-plugin/blob/master/src/main/java/com/evolvedbinary/appbundler/AppBundlerMojo.java  -->
+							<!-- required -->
+							<displayName>trolCommander</displayName>
+							<identifier>${project.main.class}</identifier>
+							<!-- <name>${project.main.class}-${project.version}</name> -->
+							<!-- optional -->
+							<applicationCategory>public.app-category.developer-tools</applicationCategory>
+							<copyright>trolCommander ${app.version}, (c) ${app.copyright} ${app.vendor}, ${github.url}</copyright>
+							<icon>${project.basedir}/res/package/osx/icon.icns</icon>
+							<jvmRequired>${java.version}+</jvmRequired>
+							<mainClassName>com.mucommander.trolCommander</mainClassName>
+							<shortVersion>${project.version}</shortVersion>
+							<version>${project.version}</version>
+							<!-- <additionalResourcePaths>
+								<fileSet>
+									<directory>${project.basedir}/res/package</directory>
+									<outputDirectory>etc</outputDirectory>
+								</fileSet>
+							</additionalResourcePaths> -->
+							<!-- <artifacts>
+								<file>trolcommander-0.9.9.jar</file>
+							</artifacts> -->
+							<options>
+								<option>-Xms128m</option>
+								<option>-Xmx128m</option>
+								<option>-Dapple.laf.useScreenMenuBar=true</option>
+								<option>-Dcom.apple.hwaccel</option>
+								<option>-Dcom.apple.smallTabs=true</option>
+								<option>-Dfile.encoding=UTF-8</option>
+								<option>-Djava.system.class.loader=com.mucommander.commons.file.AbstractFileClassLoader</option>
+								<option>-Xdock:name=trolCommander</option>
+							</options>
+							<explicitClassPath>false</explicitClassPath>
+							<isDebug>true</isDebug>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/osxappbundle-maven-plugin -->
+			<plugin>
+				<!-- source code: https://github.com/sdumitriu/osxappbundle-maven-plugin -->
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>osxappbundle-maven-plugin</artifactId>
 				<version>1.0-alpha-2</version>
@@ -684,57 +886,60 @@
 					<bundleName>muCommander</bundleName>
 					<mainClass>com.mucommander.Launcher</mainClass>
 					<iconFile>src/main/resources/icon.icns</iconFile>
-					<jvmVersion>1.7+</jvmVersion>
+					<jvmVersion>11+</jvmVersion>
 				</configuration>
-				<!--<executions> -->
-				<!--<execution> -->
-				<!--<phase>package</phase> -->
-				<!--<goals> -->
-				<!--<goal>bundle</goal> -->
-				<!--</goals> -->
-				<!--</execution> -->
-				<!--</executions> -->
+				<!-- FIXME: Can't find JavaApplicationStub binary. File does not exist: /System/Library/Frameworks/JavaVM.framework/Versions/Current/Resources/MacOS/JavaApplicationStub -->
+        <!-- <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>bundle</goal>
+            </goals>
+          </execution>
+        </executions> -->
 			</plugin>
-			<!-- <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> 
-				<version>0.7.2.201409121644</version> <executions> <execution> <id>pre-unit-test</id> 
-				<goals> <goal>prepare-agent</goal> </goals> </execution> <execution> <id>post-unit-test</id> 
-				<phase>test</phase> <goals> <goal>report</goal> <goal>check</goal> </goals> 
-				<configuration> <rules> - implmentation is needed only for Maven 2 - <rule 
-				implementation="org.jacoco.maven.RuleConfiguration"> <element>BUNDLE</element> 
-				<limits> <limit implementation="org.jacoco.report.check.Limit"> <counter>INSTRUCTION</counter> 
-				<value>COVEREDRATIO</value> <minimum>0.00</minimum> </limit> - implmentation 
-				is needed only for Maven 2 - <limit implementation="org.jacoco.report.check.Limit"> 
-				<counter>COMPLEXITY</counter> <value>COVEREDRATIO</value> <minimum>0.00</minimum> 
-				</limit> </limits> </rule> </rules> </configuration> </execution> </executions> 
+			<!-- <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.2.201409121644</version> <executions> <execution> <id>pre-unit-test</id>
+				<goals> <goal>prepare-agent</goal> </goals> </execution> <execution> <id>post-unit-test</id>
+				<phase>test</phase> <goals> <goal>report</goal> <goal>check</goal> </goals>
+				<configuration> <rules> - implmentation is needed only for Maven 2 - <rule
+				implementation="org.jacoco.maven.RuleConfiguration"> <element>BUNDLE</element>
+				<limits> <limit implementation="org.jacoco.report.check.Limit"> <counter>INSTRUCTION</counter>
+				<value>COVEREDRATIO</value> <minimum>0.00</minimum> </limit> - implmentation
+				is needed only for Maven 2 - <limit implementation="org.jacoco.report.check.Limit">
+				<counter>COMPLEXITY</counter> <value>COVEREDRATIO</value> <minimum>0.00</minimum>
+				</limit> </limits> </rule> </rules> </configuration> </execution> </executions>
 				</plugin> -->
-			<!-- <plugin> <groupId>com.github.wvengen</groupId> <artifactId>proguard-maven-plugin</artifactId> 
-				<version>2.0.11</version> <executions> <execution> <id>execution_proguard_package</id> 
-				<phase>package</phase> <goals> <goal>proguard</goal> </goals> </execution> 
-				</executions> <configuration> <proguardVersion>5.2.1</proguardVersion> <assembly> 
-				<inclusions> <inclusion> <groupId>ru.methuselah</groupId> <artifactId>securitylibrary</artifactId> 
-				<library>false</library> </inclusion> </inclusions> </assembly> <options> 
-				<option>-overloadaggressively</option> <option>-allowaccessmodification</option> 
-				<option>-mergeinterfacesaggressively</option> <option>-useuniqueclassmembernames</option> 
-				<option>-classobfuscationdictionary DictionaryClasses.txt</option> <option>-obfuscationdictionary 
-				DictionaryFieldsMethods.txt</option> <option>-adaptresourcefilenames</option> 
-				<option>-keepattributes Signature</option> <option>-repackageclasses ${project.groupId}.${project.artifactId}</option> 
-				<option>-keepclassmembers public class ru.methuselah.securitylibrary.Data.** 
-				{ *; }</option> <option>-keepclassmembers @ru.methuselah.securitylibrary.ProGuardKeep 
-				class ** { @java.lang.Override *; }</option> <option>-keep public class ${project.groupId}.${project.artifactId}.Wrapper 
-				{ public static void main(java.lang.String[]); }</option> <option>-keep public 
-				class ${project.groupId}.${project.artifactId}.Tweaker { *; }</option> <option>-dontnote 
-				ru.methuselah.securitylibrary.Data.**</option> <option>-dontnote ru.methuselah.securitylibrary.Hacks.**</option> 
-				<option>-dontnote **-shaded.**</option> </options> <injar>${project.build.finalName}.jar</injar> 
-				<outjar>${project.build.finalName}.jar</outjar> <libs> <lib>${java.home}/lib/rt.jar</lib> 
-				<lib>${java.home}/lib/jce.jar</lib> <lib>${java.home}/lib/jsse.jar</lib> 
-				</libs> </configuration> <dependencies> <dependency> <groupId>net.sf.proguard</groupId> 
-				<artifactId>proguard-base</artifactId> <version>5.2.1</version> <scope>runtime</scope> 
+			<!-- <plugin> <groupId>com.github.wvengen</groupId> <artifactId>proguard-maven-plugin</artifactId>
+				<version>2.0.11</version> <executions> <execution> <id>execution_proguard_package</id>
+				<phase>package</phase> <goals> <goal>proguard</goal> </goals> </execution>
+				</executions> <configuration> <proguardVersion>5.2.1</proguardVersion> <assembly>
+				<inclusions> <inclusion> <groupId>ru.methuselah</groupId> <artifactId>securitylibrary</artifactId>
+				<library>false</library> </inclusion> </inclusions> </assembly> <options>
+				<option>-overloadaggressively</option> <option>-allowaccessmodification</option>
+				<option>-mergeinterfacesaggressively</option> <option>-useuniqueclassmembernames</option>
+				<option>-classobfuscationdictionary DictionaryClasses.txt</option> <option>-obfuscationdictionary
+				DictionaryFieldsMethods.txt</option> <option>-adaptresourcefilenames</option>
+				<option>-keepattributes Signature</option> <option>-repackageclasses ${project.groupId}.${project.artifactId}</option>
+				<option>-keepclassmembers public class ru.methuselah.securitylibrary.Data.**
+				{ *; }</option> <option>-keepclassmembers @ru.methuselah.securitylibrary.ProGuardKeep
+				class ** { @java.lang.Override *; }</option> <option>-keep public class ${project.groupId}.${project.artifactId}.Wrapper
+				{ public static void main(java.lang.String[]); }</option> <option>-keep public
+				class ${project.groupId}.${project.artifactId}.Tweaker { *; }</option> <option>-dontnote
+				ru.methuselah.securitylibrary.Data.**</option> <option>-dontnote ru.methuselah.securitylibrary.Hacks.**</option>
+				<option>-dontnote **-shaded.**</option> </options> <injar>${project.build.finalName}.jar</injar>
+				<outjar>${project.build.finalName}.jar</outjar> <libs> <lib>${java.home}/lib/rt.jar</lib>
+				<lib>${java.home}/lib/jce.jar</lib> <lib>${java.home}/lib/jsse.jar</lib>
+				</libs> </configuration> <dependencies> <dependency> <groupId>net.sf.proguard</groupId>
+				<artifactId>proguard-base</artifactId> <version>5.2.1</version> <scope>runtime</scope>
 				</dependency> </dependencies> </plugin> -->
 
+			<!-- FIXME: configure and choose between this one and https://mvnrepository.com/artifact/net.sf.proguard/proguard-base -->
 			<plugin>
 				<!--see proguard options at http://proguard.sourceforge.net/manual/usage.html -->
 				<groupId>com.github.wvengen</groupId>
 				<artifactId>proguard-maven-plugin</artifactId>
+				<version>2.1.1</version>
 <!--				<executions>-->
 <!--					<execution>-->
 <!--						<phase>package</phase>-->
@@ -769,27 +974,37 @@
 						<option>-printseeds ${project.build.directory}/proguard-seeds.txt</option>
 						<option>-skipnonpubliclibraryclasses</option>
 					</options>
-					<!-- <option>-shrink</option> overloadaggressively="false" optimize="false" 
+					<!-- <option>-shrink</option> overloadaggressively="false" optimize="false"
 						allowaccessmodification="false" skipnonpubliclibraryclasses="false" repackageclasses="" -->
 				</configuration>
 			</plugin>
+
+			<!-- TODO: cleanup -->
+			<!-- https://mvnrepository.com/artifact/org.dstovall/onejar-maven-plugin -->
 			<plugin>
 				<groupId>org.dstovall</groupId>
 				<artifactId>onejar-maven-plugin</artifactId>
-				<version>1.4.4</version>
+				<version>${plugin.dstovall.onejar.version}</version>
 				<executions>
 					<execution>
 						<configuration>
 							<!-- Optional -->
 							<onejarVersion>0.97</onejarVersion>
-							<mainClass>com.mucommander.TrolCommander</mainClass>
+							<mainClass>${project.main.class}</mainClass>
 							<!-- Optional, use only if you need to include native libraries (dll's) -->
-							<!-- <binlibs> <fileSet> <directory>${project.build.directory}/dllextract</directory> 
+							<!-- <binlibs> <fileSet> <directory>${project.build.directory}/dllextract</directory>
 								<includes> <include>test.dll</include> </includes> </fileSet> </binlibs> -->
 							<!-- Optional, default is false -->
 							<attachToBuild>false</attachToBuild>
 							<!-- Optional, default is "onejar" -->
 							<classifier>onejar</classifier>
+							<!-- <defaultOptions>
+									<extraargs>
+											<extraarg>-frontend</extraarg>
+											<extraarg>jaxws21</extraarg>
+									</extraargs>
+									<frontEnd>jaxws21</frontEnd>
+							</defaultOptions> -->
 						</configuration>
 						<!-- <goals>
 							<goal>one-jar</goal>
@@ -797,14 +1012,18 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- TODO: cleanup -->
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
+				<version>${plugin.maven-assembly.version}</version>
 				<configuration>
 					 <archive>
 		<!-- <addMavenDescriptor>true</addMavenDescriptor> -->
       <manifest>
-        <mainClass>com.mucommander.TrolCommander</mainClass>
+        <mainClass>${project.main.class}</mainClass>
 		<!-- <addClasspath>true</addClasspath> -->
 		<!-- <addDefaultImplementationEntries>true</addDefaultImplementationEntries> -->
 		<!-- <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> -->
@@ -829,15 +1048,19 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
 	<profiles>
+		<!-- profile::format -->
 		<profile>
 			<id>format</id>
 			<build>
 				<plugins>
+					<!-- https://mvnrepository.com/artifact/net.revelc.code.formatter/formatter-maven-plugin -->
 					<plugin>
 						<groupId>net.revelc.code</groupId>
 						<artifactId>formatter-maven-plugin</artifactId>
-						<version>0.5.2</version>
+						<version>${plugin.revelc.formatter.version}</version>
 						<executions>
 							<execution>
 								<phase>verify</phase>
@@ -858,13 +1081,18 @@
 				</plugins>
 			</build>
 		</profile>
+		<!-- end::profile::format -->
 
+		<!-- profile::release -->
 		<profile>
 			<id>release</id>
 			<build>
 				<plugins>
+					<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
 					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
+						<version>${plugin.maven-resosourceurces.version}</version>
 						<executions>
 							<execution>
 								<id>attach-sources</id>
@@ -888,8 +1116,211 @@
 				</plugins>
 			</build>
 		</profile>
+		<!-- end::profile::release -->
+
+		<!-- profile::security-check -->
+		<profile>
+			<id>security-check</id>
+			<properties>
+				<skipSecurityTests>false</skipSecurityTests>
+				<skipNode>true</skipNode>
+				<skipUnitTests>true</skipUnitTests>
+				<skipITs>true</skipITs>
+				<skipTests>true</skipTests>
+			</properties>
+			<build>
+				<plugins>
+					<!-- tag::owasp-maven-plugin[] -->
+					<plugin>
+						<groupId>org.owasp</groupId>
+						<artifactId>dependency-check-maven</artifactId>
+						<version>${plugin.owasp.dependency-check.version}</version>
+						<configuration>
+							<skipSystemScope>true</skipSystemScope>
+							<skip>${skipSecurityTests}</skip>
+							<failBuildOnCVSS>5</failBuildOnCVSS>
+							<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- end::owasp-maven-plugin[] -->
+				</plugins>
+			</build>
+		</profile>
+		<!-- end::profile::security-check -->
+
+		<!-- profile::code-check -->
+		<profile>
+			<id>code-check</id>
+			<build>
+				<plugins>
+					<!-- plugin::codehaus.javancss -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>javancss-maven-plugin</artifactId>
+						<version>${plugin.codehaus.javancss.version}</version>
+						<configuration>
+							<failOnViolation>false</failOnViolation>
+							<ccnLimit>12</ccnLimit>
+							<ncssLimit>90</ncssLimit>
+						</configuration>
+					</plugin>
+					<!-- end::plugin::codehaus.javancss -->
+					<!-- plugin::apache.maven-checkstyle -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>${plugin.apache.maven-checkstyle.version}</version>
+						<configuration>
+							<configLocation>.settings/google_checks.xml</configLocation>
+							<failOnViolation>true</failOnViolation>
+							<enableSeveritySummary>true</enableSeveritySummary>
+							<enableRulesSummary>false</enableRulesSummary>
+							<enableFilesSummary>true</enableFilesSummary>
+							<linkXRef>true</linkXRef>
+							<encoding>UTF-8</encoding>
+							<excludes>**/generated/**/*.java</excludes>
+							<excludes>**${file.separator}internal${file.separator}**${file.separator}*.*</excludes>
+							<omitIgnoredModules>true</omitIgnoredModules>
+							<logViolationsToConsole>true</logViolationsToConsole>
+						</configuration>
+						<executions>
+							<execution>
+								<id>checkstyle</id>
+								<goals>
+									<goal>checkstyle</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>com.puppycrawl.tools</groupId>
+								<artifactId>checkstyle</artifactId>
+								<version>${dep.puppycrawl.checkstyle.version}</version>
+								<exclusions>
+									<exclusion>
+										<groupId>com.sun</groupId>
+										<artifactId>tools</artifactId>
+									</exclusion>
+								</exclusions>
+							</dependency>
+						</dependencies>
+					</plugin>
+					<!-- end::plugin::apache.maven-checkstyle -->
+					<!-- plugin::apache.maven-pmd -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>${plugin.apache.maven-pmd.version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>net.sourceforge.pmd</groupId>
+								<artifactId>pmd-core</artifactId>
+								<version>${dep.pmd.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>net.sourceforge.pmd</groupId>
+								<artifactId>pmd-java</artifactId>
+								<version>${dep.pmd.version}</version>
+							</dependency>
+						</dependencies>
+						<configuration>
+							<aggregate>false</aggregate>
+							<includeTests>true</includeTests>
+							<consoleOutput>true</consoleOutput>
+							<!-- <format>xml</format> -->
+							<linkXref>true</linkXref>
+							<minimumPriority>5</minimumPriority>
+							<minimumTokens>100</minimumTokens>
+							<excludes>
+								<exclude>**/generated/**/*.java</exclude>
+							</excludes>
+							<targetJdk>${jre.version}</targetJdk>
+							<sourceEncoding>UTF-8</sourceEncoding>
+							<outputEncoding>UTF-8</outputEncoding>
+						</configuration>
+					</plugin>
+					<!-- end::plugin::apache.maven-pmd -->
+					<!-- plugin::github.spotbugs -->
+					<plugin>
+						<groupId>com.github.spotbugs</groupId>
+						<artifactId>spotbugs-maven-plugin</artifactId>
+						<version>${plugin.github.spotbugs.version}</version>
+					</plugin>
+					<!-- end::plugin::github.spotbugs -->
+					<!-- plugin::codehaus.jdepend -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>jdepend-maven-plugin</artifactId>
+						<version>${plugin.codehaus.jdepend.version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>guru.nidi</groupId>
+								<artifactId>jdepend</artifactId>
+								<version>${dep.jdepend.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+					<!-- end::plugin::codehaus.jdepend -->
+				</plugins>
+			</build>
+		</profile>
+		<!-- end::profile::code-check -->
+
+		<!-- profile::code-coverage -->
+		<profile>
+			<id>code-coverage</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${plugin.jacoco.version}</version>
+						<executions>
+							<!-- Prepares the property pointing to the JaCoCo
+								runtime agent which is passed as VM argument when Maven the Surefire plugin
+								is executed. -->
+							<execution>
+								<id>pre-unit-test</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<!-- Ensures that the code coverage report for
+								unit tests is created after unit tests have been run. -->
+							<execution>
+								<id>post-unit-test</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<!-- end::profile::code-coverage -->
 	</profiles>
+
+
 	<repositories>
+		<repository>
+			<id>Maven repository</id>
+			<url>https://repo1.maven.org/maven2/</url>
+			<releases>
+					<enabled>true</enabled>
+			</releases>
+			<snapshots>
+					<enabled>true</enabled>
+			</snapshots>
+		</repository>
 		<repository>
 			<id>jcenter-bintray</id>
 			<name>Bintray JCenter Maven Repository</name>
@@ -899,22 +1330,21 @@
 				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>raisercostin-bintray</id>
-			<name>Bintray raisercostin Maven Repository</name>
-			<layout>default</layout>
-			<url>https://dl.bintray.com/raisercostin/maven</url>
-			<releases>
 				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<!-- used for: image4j -->
+		<repository>
+				<id>jitpack.io</id>
+				<url>https://jitpack.io</url>
+		</repository>
+		<!-- <repository>
+				<id>in-project</id>
+				<name>In Project Repo</name>
+				<url>file://${project.basedir}/tmp_libs</url>
+		</repository> -->
 	</repositories>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>onejar-maven-plugin.googlecode.com</id>

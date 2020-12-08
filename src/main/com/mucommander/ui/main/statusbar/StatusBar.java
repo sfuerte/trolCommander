@@ -66,8 +66,8 @@ import java.io.InputStream;
 
 /**
  * StatusBar is the component that sits at the bottom of each MainFrame, between the folder panels and command bar.
- * There is one and only one StatusBar per MainFrame, created by the associated MainFrame. It can be hidden, 
- * but the instance will always remain, until the MainFrame is disposed. 
+ * There is one and only one StatusBar per MainFrame, created by the associated MainFrame. It can be hidden,
+ * but the instance will always remain, until the MainFrame is disposed.
  *
  * <p>StatusBar is used to display info about the total/selected number of files in the current folder and current volume's
  * free/total space. When a folder is being changed, a waiting message is displayed. When quick search is being used,
@@ -84,7 +84,7 @@ import java.io.InputStream;
  */
 public class StatusBar extends JPanel implements Runnable, MouseListener, ActivePanelListener, TableSelectionListener, LocationListener, ComponentListener, ThemeListener {
 	private static final Logger LOGGER = LoggerFactory.getLogger(StatusBar.class);
-	
+
     private MainFrame mainFrame;
 
     /** Label that displays info about current selected file(s) */
@@ -92,7 +92,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
 
     /** Icon used while loading is in progress. */
     private SpinningDial dial;
-	
+
     /** Label that displays info about current volume (free/total space) */
     private VolumeSpaceLabel volumeSpaceLabel;
 
@@ -117,7 +117,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
     /** Caches volume info strings (free/total space) for a while, since this information is expensive to retrieve
      * (I/O bound). This map uses folders' volume path as its key. */
     private static final LRUCache<String, Long[]> volumeInfoCache = new FastLRUCache<>(VOLUME_INFO_CACHE_CAPACITY);
-	
+
     /** Icon that is displayed when folder is changing */
     public final static String WAITING_ICON = "waiting.png";
 
@@ -191,8 +191,8 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
 
         add(Box.createHorizontalGlue());
 
-        FileWindowsListButton fileWindowsListButton = new FileWindowsListButton();
-        add(fileWindowsListButton);
+        // FileWindowsListButton fileWindowsListButton = new FileWindowsListButton();
+        // add(fileWindowsListButton);
 
         taskPanel = new TaskPanel();
         add(taskPanel);
@@ -217,7 +217,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
         // Show/hide this status bar based on user preferences
         // Note: setVisible has to be called even with true for the auto-update thread to be initialized
         setVisible(shouldBeVisible());
-        
+
         // Catch location events to update status bar info when folder is changed
         FolderPanel leftPanel = mainFrame.getLeftPanel();
         leftPanel.getLocationManager().addLocationListener(this);
@@ -232,12 +232,12 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
 
         // Catch active panel change events to update status bar info when current table has changed
         mainFrame.addActivePanelListener(this);
-		
+
         // Catch mouse events to pop up a menu on right-click
         selectedFilesLabel.addMouseListener(this);
         volumeSpaceLabel.addMouseListener(this);
         addMouseListener(this);
-		
+
         // Catch component events to be notified when this component is made visible
         // and update status info
         addComponentListener(this);
@@ -266,7 +266,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
         updateSelectedFilesInfo();
         updateVolumeInfo();
     }
-	
+
 
     /**
      * Updates info about currently selected files ((nb of selected files, combined size), displayed on the left-side of this status bar.
@@ -295,7 +295,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
         int nbSelectedFiles = nbMarkedFiles == 0 && selectedFile != null ? 1 : nbMarkedFiles;
 
         StringBuilder filesInfo = new StringBuilder();
-		
+
         if (fileCount == 0) {
             // Set status bar to a space character, not an empty string otherwise it will disappear
             filesInfo.append(' ');
@@ -306,11 +306,11 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
                 filesInfo.append(" - ");
                 filesInfo.append(SizeFormat.format(markedTotalSize, selectedFileSizeFormat));
             }
-	
+
             if (selectedFile != null) {
                 appendSelectedFileInfo(filesInfo, selectedFile);
             }
-        }		
+        }
 
         // Update label
         setStatusInfo("<html>" + filesInfo.toString());
@@ -394,8 +394,8 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
         }
         return null;
     }
-	
-	
+
+
     /**
      * Updates info about current volume (free space, total space), displayed on the right-side of this status bar.
      */
@@ -420,9 +420,9 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
             new Thread("StatusBar.updateVolumeInfo") {
                 @Override
                 public void run() {
-                    // Free space on current volume, -1 if this information is not available 
+                    // Free space on current volume, -1 if this information is not available
                     long volumeFree;
-                    // Total space on current volume, -1 if this information is not available 
+                    // Total space on current volume, -1 if this information is not available
                     long volumeTotal;
 
                     // Folder is a local file and Java version is 1.5: call getVolumeInfo() instead of
@@ -452,9 +452,9 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
                         }
                     }
 
-// For testing the free space indicator 
+// For testing the free space indicator
 //volumeFree = (long)(volumeTotal * Math.random());
-                    
+
                     volumeSpaceLabel.setVolumeSpace(volumeTotal, volumeFree);
 
                     LOGGER.debug("Adding to cache");
@@ -466,7 +466,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
 
 
     /**
-     * Displays the specified text and icon on the left-side of the status bar, 
+     * Displays the specified text and icon on the left-side of the status bar,
      * replacing any previous information.
      *
      * @param text the piece of text to display
@@ -490,9 +490,9 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
         selectedFilesLabel.setHorizontalTextPosition(iconBeforeText ? JLabel.TRAILING : JLabel.LEADING);
     }
 
-	
+
     /**
-     * Displays the specified text on the left-side of the status bar, 
+     * Displays the specified text on the left-side of the status bar,
      * replacing any previous text and icon.
      *
      * @param infoMessage the piece of text to display
@@ -500,11 +500,11 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
     public void setStatusInfo(String infoMessage) {
         setStatusInfo(infoMessage, null, false);
     }
-	
+
 
     /**
      * Starts a volume info auto-update thread, only if there isn't already one running.
-     */    
+     */
     private synchronized void startAutoUpdate() {
         if (autoUpdateThread == null) {
             // Start volume info auto-update thread
@@ -515,7 +515,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
         }
     }
 
-    
+
     /**
      * Overrides JComponent.setVisible(boolean) to start/stop volume info auto-update thread.
      */
@@ -533,8 +533,8 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
             super.setVisible(false);
         }
     }
-    
-    
+
+
     //////////////////////
     // Runnable methods //
     //////////////////////
@@ -547,7 +547,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
             // Sleep for a while
             try { Thread.sleep(AUTO_UPDATE_PERIOD); }
             catch (InterruptedException ignore) {}
-            
+
             // Update volume info if:
             // - status bar is visible
             // - MainFrame isn't changing folders
@@ -558,12 +558,12 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
             }
         } while (autoUpdateThread != null && mainFrame.isVisible());   // Stop when MainFrame is disposed
     }
-    
+
 
     ////////////////////////////////////////
     // ActivePanelListener implementation //
     ////////////////////////////////////////
-	
+
     public void activePanelChanged(FolderPanel folderPanel) {
         updateStatusInfo();
     }
@@ -602,7 +602,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
         setStatusInfo(Translator.get("status_bar.connecting_to_folder"), dial, true);
         dial.setAnimated(true);
     }
-	
+
     public void locationCancelled(LocationEvent e) {
         dial.setAnimated(false);
         updateStatusInfo();
@@ -617,7 +617,7 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
     //////////////////////////////////
     // MouseListener implementation //
     //////////////////////////////////
-	
+
     public void mouseClicked(MouseEvent e) {
         // Discard mouse events while in 'no events mode'
         if (mainFrame.getNoEventsMode()) {
@@ -643,23 +643,23 @@ public class StatusBar extends JPanel implements Runnable, MouseListener, Active
 
     public void mousePressed(MouseEvent e) {
     }
-	
+
     public void mouseEntered(MouseEvent e) {
     }
 
     public void mouseExited(MouseEvent e) {
-    }	
-	
-	
+    }
+
+
     //////////////////////////////////////
     // ComponentListener implementation //
     //////////////////////////////////////
-	
+
     public void componentShown(ComponentEvent e) {
         // Invoked when the component has been made visible (apparently not called when just created)
         // Status bar needs to be updated sihce it is not updated when not visible
         updateStatusInfo();
-    }     
+    }
 
     public void componentHidden(ComponentEvent e) {
     }

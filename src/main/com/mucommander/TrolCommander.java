@@ -786,7 +786,7 @@ public class TrolCommander {
         if (OsFamily.MAC_OS_X.isCurrent()) {
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "trolCommander");
 			// disable openGL in javaFX (used for HtmlViewer) as it cashes JVM under vmWare
-			System.setProperty("prism.order", "sw");
+			// System.setProperty("prism.order", "sw");
         }
 
         Profiler.start("init");
@@ -796,6 +796,9 @@ public class TrolCommander {
 
         String lang = System.getProperty("user.language");
         String country = System.getProperty("user.country");
+
+        getLogger().info("Detected language: {}", lang);
+
         if ("tr".equalsIgnoreCase(lang) || "tr".equalsIgnoreCase(country)) {
             throw new RuntimeException("Unsupported");
         }
@@ -925,7 +928,7 @@ public class TrolCommander {
             }
 
             getLogger().error("Startup failed", t);
-            
+
             // Display an error dialog with a proper message and error details
             InformationDialog.showErrorDialog(null, null, Translator.get("startup_error"), null, t);
 

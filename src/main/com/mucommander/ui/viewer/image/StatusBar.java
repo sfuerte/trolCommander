@@ -17,7 +17,7 @@
  */
 package com.mucommander.ui.viewer.image;
 
-import com.mucommander.ui.main.statusbar.FileWindowsListButton;
+// import com.mucommander.ui.main.statusbar.FileWindowsListButton;
 import org.fife.ui.StatusBarPanel;
 
 import javax.swing.JLabel;
@@ -29,7 +29,7 @@ import java.util.Date;
  * Created on 11/03/14.
  */
 public class StatusBar extends org.fife.ui.StatusBar {
-    private FileWindowsListButton lbFiles;
+    // private FileWindowsListButton lbFiles;
 
     private JLabel lblImageSize;
     private JLabel lblFileNumber;
@@ -42,9 +42,9 @@ public class StatusBar extends org.fife.ui.StatusBar {
     public StatusBar() {
         super("");
 
-        lbFiles = new FileWindowsListButton(true);
-        StatusBarPanel panelWindows = new StatusBarPanel(new BorderLayout());
-        panelWindows.add(lbFiles);
+        // lbFiles = new FileWindowsListButton(true);
+        // StatusBarPanel panelWindows = new StatusBarPanel(new BorderLayout());
+        // panelWindows.add(lbFiles);
 
         lblImageSize = new JLabel();
         StatusBarPanel panelImageSize = new StatusBarPanel(new BorderLayout(), lblImageSize);
@@ -66,7 +66,7 @@ public class StatusBar extends org.fife.ui.StatusBar {
         c.fill = GridBagConstraints.BOTH;
 
         c.weightx = 0.0;
-        addStatusBarComponent(panelWindows, c);
+        // addStatusBarComponent(panelWindows, c);
         addStatusBarComponent(panelImageSize, c);
         addStatusBarComponent(panelFileNumber, c);
         addStatusBarComponent(panelZoom, c);

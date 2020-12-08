@@ -32,7 +32,8 @@ public enum FileType {
     NONE("None", SyntaxConstants.SYNTAX_STYLE_NONE),
     ACTIONSCRIPT("ActionScript", SyntaxConstants.SYNTAX_STYLE_ACTIONSCRIPT, "*.as"),
     ASSEMBLER_X86("Assembler x86", SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_X86, "*.asm"),
-    ASSEMBLER_AVR("Assembler AVR", SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_AVR, "*.lss,*.s"),
+    // TODO: remove
+    ASSEMBLER_AVR("Assembler AVR", SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_X86, "*.lss,*.s"),
     BBCODE("BBCode", SyntaxConstants.SYNTAX_STYLE_BBCODE),
     C("C", SyntaxConstants.SYNTAX_STYLE_C, "*.c,*.m"),
     CLOJURE("Clojure", SyntaxConstants.SYNTAX_STYLE_CLOJURE, "*.clj"),
@@ -44,7 +45,8 @@ public enum FileType {
     FORTRAN("Fortran", SyntaxConstants.SYNTAX_STYLE_FORTRAN, "*.f,*.for,*.ftn,*.i"),
     GO("Go", SyntaxConstants.SYNTAX_STYLE_GO, "*.go"),
     GROOVY("Groovy", SyntaxConstants.SYNTAX_STYLE_GROOVY,"*.groovy,*.gvy,*.gy,*.gsh,*.gradle"),
-    HEX("Intel HEX", SyntaxConstants.SYNTAX_STYLE_HEX, "*.hex,*.ihex"),
+    // TODO: remove
+    HEX("Intel HEX", SyntaxConstants.SYNTAX_STYLE_NONE, "*.hex,*.ihex"),
     HTACCESS("htaccess", SyntaxConstants.SYNTAX_STYLE_HTACCESS, ".htaccess"),
     HTML("HTML", SyntaxConstants.SYNTAX_STYLE_HTML, "*.html,*.htm"),
     JAVA("Java", SyntaxConstants.SYNTAX_STYLE_JAVA, "*.java"),
@@ -62,7 +64,8 @@ public enum FileType {
     PROPERTIES_FILE("Properties file", SyntaxConstants.SYNTAX_STYLE_PROPERTIES_FILE, "*.properties,*.prop,*.conf,*.yml"),
     PYTHON("Python", SyntaxConstants.SYNTAX_STYLE_PYTHON, "*.py,make.builder"),
     RUBY("Ruby", SyntaxConstants.SYNTAX_STYLE_RUBY, "*.rb"),
-    RUST("Rust", SyntaxConstants.SYNTAX_STYLE_RUST, "*.rs,*.rs.in"),
+    // TODO: remove
+    RUST("Rust", SyntaxConstants.SYNTAX_STYLE_NONE, "*.rs,*.rs.in"),
     SAS("SAS", SyntaxConstants.SYNTAX_STYLE_SAS, "*.sas"),
     SCALA("Scala", SyntaxConstants.SYNTAX_STYLE_SCALA, "*.scala"),
     SQL("SQL", SyntaxConstants.SYNTAX_STYLE_SQL, "*.sql"),

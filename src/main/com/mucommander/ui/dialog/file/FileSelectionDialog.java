@@ -54,7 +54,7 @@ import com.mucommander.ui.main.table.FileTable;
  */
 public class FileSelectionDialog extends FocusDialog implements ActionListener {
 
-    /** Add to or remove from selection ? */	 
+    /** Add to or remove from selection ? */
     private boolean addToSelection;
 
     private JTextField selectionField;
@@ -65,28 +65,28 @@ public class FileSelectionDialog extends FocusDialog implements ActionListener {
     private JButton okButton;
 
     private MainFrame mainFrame;
-	
-    /** 
+
+    /**
      * Is selection case sensitive? (initially false)
      * <br>Note: this field is static so the value is kept after the dialog is OKed.
-     */ 
+     */
     private static boolean caseSensitive = false;
 
-    /** 
+    /**
      * Does the selection include folders? (initially false)
      * <br>Note: this field is static so the value is kept after the dialog is OKed.
-     */ 
+     */
     private static boolean includeFolders = false;
 
-    /** 
+    /**
      * Keyword which has last been typed to mark or unmark files.
      * <br>Note: this field is static so the value is kept after the dialog is OKed.
-     */ 
+     */
     private static String keywordString = "*";
-	
 
-    private final static Dimension MINIMUM_DIALOG_DIMENSION = new Dimension(320,0);	
-    private final static Dimension MAXIMUM_DIALOG_DIMENSION = new Dimension(400,10000);	
+
+    private final static Dimension MINIMUM_DIALOG_DIMENSION = new Dimension(320,0);
+    private final static Dimension MAXIMUM_DIALOG_DIMENSION = new Dimension(400,10000);
 
 
     /**
@@ -97,7 +97,7 @@ public class FileSelectionDialog extends FocusDialog implements ActionListener {
     public FileSelectionDialog(MainFrame mainFrame, boolean addToSelection) {
 
         super(mainFrame, i18n(addToSelection?"file_selection_dialog.mark":"file_selection_dialog.unmark"), mainFrame);
-	
+
         this.mainFrame = mainFrame;
         this.addToSelection = addToSelection;
 
@@ -125,13 +125,13 @@ public class FileSelectionDialog extends FocusDialog implements ActionListener {
 
         // Add some vertical space
         northPanel.addSpace(10);
-		
+
         caseSensitiveCheckBox = new JCheckBox(i18n("file_selection_dialog.case_sensitive"), caseSensitive);
         northPanel.add(caseSensitiveCheckBox);
 
         includeFoldersCheckBox = new JCheckBox(i18n("file_selection_dialog.include_folders"), includeFolders);
         northPanel.add(includeFoldersCheckBox);
-		
+
         northPanel.addSpace(10);
         northPanel.add(Box.createVerticalGlue());
 
@@ -151,7 +151,7 @@ public class FileSelectionDialog extends FocusDialog implements ActionListener {
     ////////////////////////////
     // ActionListener methods //
     ////////////////////////////
-	
+
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
@@ -184,7 +184,7 @@ public class FileSelectionDialog extends FocusDialog implements ActionListener {
 
             activeTable.repaint();
         }
-		
+
         dispose();
     }
 

@@ -19,7 +19,7 @@
 
 /*
  * This file is copied from https://github.com/stephenc/java-iso-tools/blob/master/iso9660-writer/src/main/java/com/github/stephenc/javaisotools/iso9660/impl/CreateISO.java
- * and has been modified to be able to retrieve data from the arhiving process
+ * and has been modified to be able to retrieve data from the archiving process
  */
 
 package com.mucommander.commons.file.impl.iso;
@@ -99,14 +99,14 @@ public class MuCreateISO {
 
         streamHandler.endDocument();
     }
-    
+
     /**
      * @return Name of current file being processed
      */
     public String getProcessingFile(){
         return fileHandler != null ? fileHandler.getProcessingFile() : null;
     }
-    
+
     /**
      * Written bytes in total without the current file progress
      * @return number of bytes written as a long
@@ -123,12 +123,12 @@ public class MuCreateISO {
     public long writtenBytesCurrentFile() {
         return fileHandler != null ? fileHandler.writtenBytesCurrentFile(): 0;
     }
-    
+
     /**
      * @return Size of the current file being processed in bytes
      */
     public long currentFileLength(){
         return fileHandler != null ? fileHandler.currentFileLength(): 0;
     }
-    
+
 }

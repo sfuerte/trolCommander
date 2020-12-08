@@ -19,6 +19,7 @@ package ru.trolsoft.macosx;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.lang.reflect.Field;
@@ -49,22 +50,14 @@ public class RetinaImageIcon extends ImageIcon {
      * @return true if Retina display found
      */
     private static boolean checkRetina() {
-        boolean isRetina = false;
-        GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        GraphicsDevice graphicsDevice = GraphicsEnvironment
+                .getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice();
+        GraphicsConfiguration graphicsConfig = graphicsDevice
+                .getDefaultConfiguration();
 
-        try {
-            Field field = graphicsDevice.getClass().getDeclaredField("scale");
-            if (field != null) {
-                field.setAccessible(true);
-                Object scale = field.get(graphicsDevice);
-                if (scale instanceof Integer && (Integer) scale == 2) {
-                    isRetina = true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return isRetina;
+        AffineTransform tx = graphicsConfig.getDefaultTransform();
+        return Math.round(tx.getScaleX()) == 2;
     }
 
 

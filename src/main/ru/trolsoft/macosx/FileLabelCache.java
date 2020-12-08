@@ -17,7 +17,7 @@
  */
 package ru.trolsoft.macosx;
 
-import ch.randelshofer.quaqua.osx.OSXFile;
+// import ch.randelshofer.quaqua.osx.OSXFile;
 import com.mucommander.commons.file.AbstractFile;
 import com.mucommander.commons.file.impl.CachedFile;
 import com.mucommander.commons.file.impl.local.LocalFile;
@@ -96,8 +96,8 @@ public class FileLabelCache {
             file = ((CachedFile) file).getProxiedFile();
         }
         if (file instanceof LocalFile) {
-            File f = (File) file.getUnderlyingFileObject();
-            return OSXFile.getLabelColor(OSXFile.getLabel(f), 0);
+            // File f = (File) file.getUnderlyingFileObject();
+            // return OSXFile.getLabelColor(OSXFile.getLabel(f), 0);
         }
         return null;
     }

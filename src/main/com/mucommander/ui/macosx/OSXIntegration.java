@@ -70,7 +70,7 @@ public class OSXIntegration {
 
         // Catch 'About', 'Preferences' and 'Quit' events
         try {
-            if (JavaVersion.JAVA_1_9.isCurrentOrHigher()) {
+            if (JavaVersion.JAVA_11.isCurrentOrHigher()) {
                 new Java9DesktopHandler();
             } else {
                 new EAWTHandler();
@@ -85,7 +85,7 @@ public class OSXIntegration {
      */
     static void showAbout() {
         MainFrame mainFrame = WindowManager.getCurrentMainFrame();
-        
+
         // Do nothing (return) when in 'no events mode'
         if (mainFrame.getNoEventsMode()) {
             return;
@@ -120,7 +120,7 @@ public class OSXIntegration {
 
         // We got a green -> quit!
         WindowManager.quit();
-                
+
         return true;
     }
 }

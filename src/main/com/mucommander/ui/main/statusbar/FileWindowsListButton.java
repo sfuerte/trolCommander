@@ -34,6 +34,7 @@ import java.util.List;
 
 import static com.mucommander.ui.viewer.FileViewersList.FileRecord;
 
+// FIXME: disabled due to com/sun/java/swing/plaf/windows/WindowsLookAndFeel NCFE in jidesoft library
 /**
  * Created on 09/06/16.
  * @author Oleg Trifonov

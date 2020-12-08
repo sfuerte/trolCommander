@@ -91,9 +91,9 @@ public class MuTerminalTtyConnector extends PtyProcessTtyConnector implements Lo
         String[] command = cmd.split(" ");
 
         if (Platform.isWindows()) {
-            return new WinPtyProcess(command, PtyUtil.toStringArray(envs), directory);
+            return new WinPtyProcess(command, PtyUtil.toStringArray(envs), directory, false);
         }
-        return new UnixPtyProcess(command, PtyUtil.toStringArray(envs), directory, new Pty(false));
+        return new UnixPtyProcess(command, PtyUtil.toStringArray(envs), directory, new Pty(false), new Pty(false));
 //        return PtyProcess.exec(command, envs, null);
     }
 
@@ -102,4 +102,3 @@ public class MuTerminalTtyConnector extends PtyProcessTtyConnector implements Lo
     }
 
 }
-
